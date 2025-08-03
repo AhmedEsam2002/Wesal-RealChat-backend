@@ -18,12 +18,12 @@ export const signup = catchAsync(async (req, res, next) => {
     password,
     confirmPassword,
   });
-  //   Send Token And Response
-  // await sendEmail({
-  //   to: user.email,
-  //   subject: "Welcome to Our Chat Application!",
-  //   text: `Hello ${user.name},\n\nThank you for signing up! We're excited to have you on board.\n\nBest regards,\nThe Team`,
-  // });
+  // Send Token And Response
+  await sendEmail({
+    to: user.email,
+    subject: "Welcome to Our Chat Application!",
+    text: `Hello ${user.name},\n\nThank you for signing up! We're excited to have you on board.\n\nBest regards,\nThe Team`,
+  });
 
   createSentToken(user, 201, res);
 });
@@ -40,11 +40,11 @@ export const login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
   }
 
-  // await sendEmail({
-  //   to: user.email,
-  //   subject: "Login Notification",
-  //   text: `Hello ${user.name},\n\nYou have successfully logged in to your account.\n\nIf this wasn't you, please contact support immediately.\n\nBest regards,\nThe Team`,
-  // });
+  await sendEmail({
+    to: user.email,
+    subject: "Login Notification",
+    text: `Hello ${user.name},\n\nYou have successfully logged in to your account.\n\nIf this wasn't you, please contact support immediately.\n\nBest regards,\nThe Team`,
+  });
 
   //   Send Token And Response
   createSentToken(user, 200, res);
